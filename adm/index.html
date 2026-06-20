@@ -21,6 +21,7 @@
         h1, h2, h3, .font-serif { font-family: 'Cormorant Garamond', serif; }
         .gold-text { color: var(--gold-primary); }
         .gold-bg { background-color: var(--gold-primary); }
+        .gold-bg-hover:hover { background-color: var(--gold-secondary); }
         .sup-plus { vertical-align: super; font-size: 0.6em; color: var(--gold-primary); }
         .glass-card { background: var(--bg-secondary); border: 1px solid var(--border-gold); }
         input, select, textarea {
@@ -43,7 +44,8 @@
             <div class="space-y-4">
                 <input type="text" id="loginID" placeholder="ID do Cliente (EUMAIS...)" class="w-full rounded-2xl px-6 py-4 text-center font-bold outline-none transition-all">
                 <input type="password" id="loginSenha" placeholder="Sua Senha Mestra" class="w-full rounded-2xl px-6 py-4 text-center font-bold outline-none transition-all">
-                <button onclick="realizarLogin()" id="btnLogin" class="w-full bg-gold-primary hover:bg-gold-secondary text-black font-black py-4 rounded-2xl transition-all shadow-xl shadow-gold-primary/10 uppercase text-xs tracking-widest">
+                <!-- AJUSTE AQUI: Corrigido cor e hover do botão de login -->
+                <button onclick="realizarLogin()" id="btnLogin" class="w-full gold-bg gold-bg-hover text-black font-black py-4 rounded-2xl transition-all shadow-xl shadow-gold-primary/10 uppercase text-xs tracking-widest">
                     ENTRAR NO PAINEL
                 </button>
             </div>
@@ -60,7 +62,8 @@
                     <p class="text-[9px] font-bold gold-text uppercase tracking-widest">Gestão de Propósito e Estrutura</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="abrirModalNovaCampanha()" class="bg-gold-primary hover:bg-gold-secondary text-black text-[10px] font-black px-5 py-3 rounded-xl transition-all shadow-lg">
+                    <!-- AJUSTE AQUI: Corrigido cor e hover do botão Nova Campanha -->
+                    <button onclick="abrirModalNovaCampanha()" class="gold-bg gold-bg-hover text-black text-[10px] font-black px-5 py-3 rounded-xl transition-all shadow-lg">
                         <i class="fa-solid fa-plus-circle mr-2"></i> NOVA CAMPANHA
                     </button>
                     <button onclick="logout()" class="text-zinc-500 hover:text-white text-xs"><i class="fa-solid fa-right-from-bracket"></i></button>
@@ -189,6 +192,7 @@
                     <textarea name="obsCampanha" placeholder="Ex: Doe 3 cotas e ganhe um brinde..." class="w-full rounded-2xl px-4 py-4 outline-none transition-all h-20"></textarea>
                 </div>
                 <div class="md:col-span-2 pt-4">
+                    <!-- AJUSTE AQUI: Corrigido cor do botão Lançar Campanha (O hover não foi adicionado aqui para manter a suavidade clássica do modal, mas a cor principal foi fixada) -->
                     <button type="submit" class="w-full gold-bg text-black font-black py-5 rounded-2xl transition-all shadow-xl shadow-gold-primary/10 uppercase text-xs tracking-widest">
                         LANÇAR CAMPANHA AGORA
                     </button>
@@ -320,21 +324,6 @@
 
         function abrirModalNovaCampanha() { document.getElementById("modalNovaCampanha").classList.remove("hidden"); document.getElementById("modalNovaCampanha").classList.add("flex"); }
         function fecharModalNovaCampanha() { document.getElementById("modalNovaCampanha").classList.add("hidden"); document.getElementById("modalNovaCampanha").classList.remove("flex"); }
-
-        document.getElementById("formNovaCampanha").onsubmit = async (e) => {
-            e.preventDefault();
-            const data = Object.fromEntries(new FormData(e.target).entries());
-            data.action = "criarcampanha";
-            data.idCliente = sessao.idCliente;
-            try {
-                const res = await fetch(API_URL, { method: "POST", body: JSON.stringify(data) });
-                const json = await res.json();
-                if(json.status === "sucesso") { alert("Campanha lançada!"); fecharModalNovaCampanha(); await carregarCampanhas(); }
-            } catch(e) { alert("Erro ao criar."); }
-        };
-
-        function logout() { location.reload(); }
-        function copiarLink() { const link = document.getElementById("linkPublico"); link.select(); navigator.clipboard.writeText(link.value); alert("Link copiado!"); }
     </script>
 </body>
 </html>
