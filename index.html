@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doar agora | Colabora AI⁺</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #060E18;
+            --bg-secondary: #0A1624;
+            --gold-primary: #C4974A;
+            --gold-secondary: #D4AA62;
+            --green-missao: #7AAD66;
+            --text-primary: #EEF0F2;
+            --border-gold: rgba(196, 151, 74, 0.18);
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .gold-text { color: var(--gold-primary); }
+        .green-text { color: var(--green-missao); }
+        .sup-plus { vertical-align: super; font-size: 0.6em; color: var(--gold-primary); }
+        .glass-card { background: var(--bg-secondary); border: 1px solid var(--border-gold); }
+        
+        .grid-numbers { display: grid; grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); gap: 8px; }
+        .num-btn {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .num-vago { background: rgba(122, 173, 102, 0.1); color: var(--green-missao); border-color: rgba(122, 173, 102, 0.2); }
+        .num-vago:hover { background: var(--green-missao); color: #000; }
+        .num-selecionado { background: var(--gold-primary); color: #000; border-color: var(--gold-primary); }
+        .num-reservado { background: rgba(251, 191, 36, 0.1); color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); cursor: not-allowed; }
+        .num-pago { background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2); cursor: not-allowed; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <header class="w-full py-8 px-4 text-center space-y-2">
+        <h1 class="text-4xl font-semibold tracking-tighter">COLABORA AI<span class="sup-plus">⁺</span></h1>
+        <p class="text-[10px] font-bold gold-text uppercase tracking-widest" id="nomeInstituicao">Carregando...</p>
+        <div class="h-[1px] w-16 bg-gold-primary mx-auto mt-4 opacity-30"></div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 space-y-8">
+        <!-- DETALHES DA CAMPANHA -->
+        <section class="glass-card rounded-[2rem] p-8 space-y-6 text-center">
+            <h2 class="text-3xl italic" id="nomeCampanha">---</h2>
+            <div class="flex justify-center gap-8 py-4 border-y border-gold-primary/10">
+                <div>
+                    <p class="text-[9px] font-bold text-zinc-500 uppercase">Valor da Cota</p>
+                    <p class="text-2xl font-black gold-text" id="valorCota">R$ 0,00</p>
+                </div>
+                <div>
+                    <p class="text-[9px] font-bold text-zinc-500 uppercase">Status</p>
+                    <p class="text-2xl font-black green-text" id="statusCampanha">---</p>
+                </div>
+            </div>
+            <div class="text-left space-y-4">
+                <div>
+                    <p class="text-[10px] font-bold gold-text uppercase mb-1">Propósito da Arrecadação</p>
+                    <p class="text-sm text-zinc-300 leading-relaxed" id="descPropisito">---</p>
+                </div>
+                <div id="boxObs" class="hidden bg-white/5 p-4 rounded-xl border-l-4 border-gold-primary">
+                    <p class="text-[10px] font-bold gold-text uppercase mb-1">Observações / Promoções</p>
+                    <p class="text-sm italic text-zinc-400" id="txtObs">---</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRID DE NÚMEROS -->
+        <section class="space-y-4">
+            <div class="flex justify-between items-center px-2">
+                <h3 class="text-xl italic">Escolha suas cotas</h3>
+                <div class="flex gap-3 text-[9px] font-bold uppercase">
+                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-600"></div> Livres</span>
+                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-amber-500"></div> Reservados</span>
+                </div>
+            </div>
+            <div class="glass-card rounded-[2rem] p-6">
+                <div id="gridNumeros" class="grid-numbers"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER FIXO DE CHECKOUT -->
+    <div id="footerCheckout" class="fixed bottom-0 left-0 w-full bg-[#0A1624] border-t border-gold-primary/20 p-4 transform translate-y-full transition-all duration-300 z-50">
+        <div class="max-w-3xl mx-auto flex items-center justify-between">
+            <div>
+                <p class="text-[10px] font-bold text-zinc-500 uppercase">Cotas Selecionadas</p>
+                <p id="txtCheckout" class="text-sm font-black gold-text">Nenhuma</p>
+            </div>
+            <button onclick="abrirModalReserva()" class="bg-gold-primary text-black font-black px-8 py-3 rounded-xl uppercase text-xs tracking-widest shadow-xl shadow-gold-primary/20">
+                DOAR AGORA <span id="totalCheckout">R$ 0,00</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE RESERVA -->
+    <div id="modalReserva" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+        <div class="glass-card rounded-[2.5rem] p-8 max-w-md w-full space-y-6">
+            <div class="text-center">
+                <h2 class="text-3xl italic gold-text">Confirmar Doação</h2>
+                <p class="text-xs text-zinc-500 uppercase tracking-widest mt-1">Preencha seus dados para identificação</p>
+            </div>
+            <form id="formReserva" class="space-y-4">
+                <input type="text" id="nomeDoador" placeholder="Seu Nome Completo" class="w-full rounded-xl px-4 py-4 outline-none transition-all" required>
+                <input type="tel" id="zapDoador" placeholder="Seu WhatsApp (99) 99999-9999" class="w-full rounded-xl px-4 py-4 outline-none transition-all" required>
+                
+                <div class="bg-black/30 p-4 rounded-xl space-y-2">
+                    <div class="flex justify-between text-xs"><span class="text-zinc-500">Cotas:</span><span id="resumoCotas" class="font-bold gold-text">---</span></div>
+                    <div class="flex justify-between text-lg font-black"><span class="text-white">Total:</span><span id="resumoTotal" class="gold-text">R$ 0,00</span></div>
+                </div>
+
+                <p class="text-[9px] text-zinc-500 text-center italic">"Envio meu nome e telefone de forma voluntária para participar da ação social."</p>
+
+                <button type="submit" id="btnConfirmar" class="w-full bg-gold-primary text-black font-black py-4 rounded-xl uppercase text-xs tracking-widest shadow-xl shadow-gold-primary/20">
+                    RESERVAR E VER PIX
+                </button>
+                <button type="button" onclick="fecharModalReserva()" class="w-full text-zinc-500 text-[10px] font-bold uppercase">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "COLE_AQUI_A_URL_DO_SEU_SCRIPT";
+        const urlParams = new URLSearchParams(window.location.search);
+        const idCampanha = urlParams.get('id');
+        const idCliente = urlParams.get('cli');
+
+        let dadosCampanha = null;
+        let selecionados = [];
+        let ocupados = {};
+
+        async function init() {
+            if(!idCampanha || !idCliente) { alert("Link inválido."); return; }
+            await carregarDados();
+        }
+
+        async function carregarDados() {
+            try {
+                // Carregar Campanhas para pegar os detalhes
+                const resC = await fetch(`${API_URL}?action=listarcampanhas&idCliente=${idCliente}`);
+                const jsonC = await resC.json();
+                dadosCampanha = jsonC.campanhas.find(c => c.id === idCampanha);
+                
+                document.getElementById("nomeInstituicao").innerText = "INSTITUIÇÃO ID: " + idCliente;
+                document.getElementById("nomeCampanha").innerText = dadosCampanha.nome;
+                document.getElementById("valorCota").innerText = `R$ ${dadosCampanha.valorCota.toFixed(2)}`;
+                document.getElementById("statusCampanha").innerText = dadosCampanha.status;
+                document.getElementById("descPropisito").innerText = dadosCampanha.descricaoPremios;
+                
+                if(dadosCampanha.obsCampanha) {
+                    document.getElementById("boxObs").classList.remove("hidden");
+                    document.getElementById("txtObs").innerText = dadosCampanha.obsCampanha;
+                }
+
+                // Carregar Ocupação
+                const resR = await fetch(`${API_URL}?action=listarreservas&idCliente=${idCliente}&idCampanha=${idCampanha}`);
+                const jsonR = await resR.json();
+                
+                ocupados = {};
+                jsonR.reservas.forEach(r => {
+                    const nums = r.numeros.split(", ");
+                    nums.forEach(n => ocupados[parseInt(n)] = r.statusPagamento === "Aprovado" ? "pago" : "reservado");
+                });
+
+                renderizarGrid();
+            } catch(e) { console.error(e); }
+        }
+
+        function renderizarGrid() {
+            const grid = document.getElementById("gridNumeros");
+            grid.innerHTML = "";
+            const total = parseInt(dadosCampanha.totalNumeros);
+            
+            for(let i=1; i<=total; i++) {
+                const btn = document.createElement("div");
+                btn.className = "num-btn ";
+                btn.innerText = i.toString().padStart(3, '0');
+                
+                if(ocupados[i]) {
+                    btn.className += ocupados[i] === "pago" ? "num-pago" : "num-reservado";
+                } else {
+                    btn.className += selecionados.includes(i) ? "num-selecionado" : "num-vago";
+                    btn.onclick = () => alternarSelecao(i);
+                }
+                grid.appendChild(btn);
+            }
+        }
+
+        function alternarSelecao(num) {
+            if(selecionados.includes(num)) {
+                selecionados = selecionados.filter(n => n !== num);
+            } else {
+                selecionados.push(num);
+            }
+            renderizarGrid();
+            atualizarCheckout();
+        }
+
+        function atualizarCheckout() {
+            const footer = document.getElementById("footerCheckout");
+            if(selecionados.length > 0) {
+                footer.classList.remove("translate-y-full");
+                document.getElementById("txtCheckout").innerText = selecionados.sort((a,b)=>a-b).join(", ");
+                document.getElementById("totalCheckout").innerText = `R$ ${(selecionados.length * dadosCampanha.valorCota).toFixed(2)}`;
+            } else {
+                footer.classList.add("translate-y-full");
+            }
+        }
+
+        function abrirModalReserva() {
+            document.getElementById("resumoCotas").innerText = selecionados.join(", ");
+            document.getElementById("resumoTotal").innerText = `R$ ${(selecionados.length * dadosCampanha.valorCota).toFixed(2)}`;
+            document.getElementById("modalReserva").classList.remove("hidden");
+            document.getElementById("modalReserva").classList.add("flex");
+        }
+
+        function fecharModalReserva() {
+            document.getElementById("modalReserva").classList.add("hidden");
+            document.getElementById("modalReserva").classList.remove("flex");
+        }
+
+        document.getElementById("formReserva").onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("btnConfirmar");
+            btn.disabled = true; btn.innerText = "PROCESSANDO...";
+
+            const dados = {
+                action: "registrardoacao",
+                idCliente: idCliente,
+                idCampanha: idCampanha,
+                comprador: document.getElementById("nomeDoador").value,
+                whatsapp: document.getElementById("zapDoador").value,
+                numeros: selecionados.map(n => n.toString().padStart(3, '0')).join(", ")
+            };
+
+            try {
+                const res = await fetch(API_URL, { method: "POST", body: JSON.stringify(dados) });
+                const json = await res.json();
+                if(json.status === "sucesso") {
+                    alert("Reserva realizada! Clique em OK para enviar o comprovante via WhatsApp.");
+                    const msg = `Olá, realizei uma doação na campanha ${dadosCampanha.nome}.\n\nID Transação: ${json.idTransacao}\nCotas: ${dados.numeros}\nTotal: ${document.getElementById("resumoTotal").innerText}\n\nEstou enviando o comprovante em anexo.`;
+                    window.location.href = `https://api.whatsapp.com/send?phone=27997161826&text=${encodeURIComponent(msg)}`;
+                }
+            } catch(e) { alert("Erro ao processar."); }
+            btn.disabled = false; btn.innerText = "RESERVAR E VER PIX";
+        };
+
+        init();
+    </script>
+</body>
+</html>
