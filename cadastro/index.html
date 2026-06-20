@@ -28,6 +28,7 @@
         .gold-text { color: var(--gold-primary); }
         .gold-border { border-color: var(--gold-primary); }
         .gold-bg { background-color: var(--gold-primary); }
+        .gold-bg-hover:hover { background-color: var(--gold-secondary); }
         .sup-plus {
             vertical-align: super;
             font-size: 0.6em;
@@ -57,7 +58,7 @@
         <div class="text-center space-y-2">
             <h1 class="text-5xl font-semibold tracking-tighter">EU<span class="sup-plus">⁺</span> Missão</h1>
             <p class="text-sm font-light tracking-[0.2em] gold-text uppercase">Colabora AI<span class="sup-plus">⁺</span></p>
-            <div class="h-[1px] w-24 bg-gold-primary mx-auto mt-4 opacity-30"></div>
+            <div class="h-[1px] w-24 gold-bg mx-auto mt-4 opacity-30"></div>
         </div>
 
         <!-- CARD DE CADASTRO -->
@@ -99,7 +100,7 @@
                     </div>
                 </div>
 
-                <button type="submit" id="btnSubmit" class="w-full bg-gold-primary hover:bg-gold-secondary text-black font-bold py-4 rounded-xl transition-all shadow-xl shadow-gold-primary/10 uppercase text-xs tracking-widest mt-4">
+                <button type="submit" id="btnSubmit" class="w-full gold-bg gold-bg-hover text-black font-bold py-4 rounded-xl transition-all shadow-xl shadow-gold-primary/10 uppercase text-xs tracking-widest mt-4">
                     ATIVAR MINHA ESTRUTURA EU<span class="sup-plus" style="color:black">⁺</span>
                 </button>
             </form>
