@@ -266,7 +266,7 @@
 
         async function atualizarDados() {
             try {
-                const res = await fetch(`${API_URL}?action=listarreservas&idCliente=${sessao.Nome_Loja}&idCampanha=${campanhaAtiva.id}`);
+                const res = await fetch(`${API_URL}?action=listarreservas&idCliente=${sessao.ID_Cliente}&idCampanha=${campanhaAtiva.id}`);
                 const json = await res.json();
                 const tabela = document.getElementById("tabelaReservas");
                 tabela.innerHTML = "";
