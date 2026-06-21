@@ -38,12 +38,12 @@
         <div class="glass-card rounded-[2.5rem] p-10 max-w-md w-full shadow-2xl text-center space-y-8">
             <div class="space-y-2">
                 <h1 class="text-4xl font-semibold tracking-tighter">COLABORA AI<span class="sup-plus">⁺</span></h1>
-                <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Painel Administrativo Cliente EU⁺</p>
+                <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Painel Administrativo do Cliente</p>
             </div>
             <div class="space-y-4">
                 <input type="text" id="loginID" placeholder="ID do Cliente (EUMAIS...)" class="w-full rounded-2xl px-6 py-4 text-center font-bold outline-none transition-all">
                 <input type="password" id="loginSenha" placeholder="Sua Senha Mestra" class="w-full rounded-2xl px-6 py-4 text-center font-bold outline-none transition-all">
-                <button onclick="realizarLogin()" id="btnLogin" class="w-full bg-[var(--gold-primary)] hover:bg-[var(--gold-secondary)] text-black font-black py-4 rounded-2xl transition-all shadow-xl shadow-[var(--gold-primary)]/10 uppercase text-xs tracking-widest">
+                <button onclick="realizarLogin()" id="btnLogin" class="w-full bg-gold-primary hover:bg-gold-secondary text-black font-black py-4 rounded-2xl transition-all shadow-xl shadow-gold-primary/10 uppercase text-xs tracking-widest">
                     ENTRAR NO PAINEL
                 </button>
             </div>
@@ -60,8 +60,8 @@
                     <p class="text-[9px] font-bold gold-text uppercase tracking-widest">Gestão de Propósito e Estrutura</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="abrirModalNovaCampanha()" class="bg-[var(--gold-primary)] hover:bg-gold-secondary text-black text-[10px] font-black px-5 py-3 rounded-xl transition-all shadow-lg">
-                        <i class="fa-solid fa-plus-circle mr-2"></i> CRIAR CAMPANHA
+                    <button onclick="abrirModalNovaCampanha()" class="bg-gold-primary hover:bg-gold-secondary text-black text-[10px] font-black px-5 py-3 rounded-xl transition-all shadow-lg">
+                        <i class="fa-solid fa-plus-circle mr-2"></i> NOVA CAMPANHA
                     </button>
                     <button onclick="logout()" class="text-zinc-500 hover:text-white text-xs"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
@@ -87,10 +87,10 @@
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <button onclick="abrirRelatorio()" class="bg-zinc-800 hover:bg-zinc-700 text-white text-[10px] font-bold px-4 py-3 rounded-xl transition-all">
-                                <i class="fa-solid fa-chart-pie mr-2"></i> EM BREVE
+                                <i class="fa-solid fa-chart-pie mr-2"></i> RELATÓRIO
                             </button>
                             <button onclick="encerrarCampanhaAtual()" class="bg-red-500/10 hover:bg-red-500/20 text-red-500 text-[10px] font-bold px-4 py-3 rounded-xl border border-red-500/20 transition-all">
-                                <i class="fa-solid fa-power-off mr-2"></i> EM BREVE
+                                <i class="fa-solid fa-power-off mr-2"></i> ENCERRAR
                             </button>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                         <i class="fa-solid fa-heart gold-text"></i> Lista de Doadores
                     </h3>
                     <button onclick="baixarExcel()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[9px] font-black px-4 py-2 rounded-lg transition-all">
-                        <i class="fa-solid fa-file-excel mr-1"></i> EM BREVE
+                        <i class="fa-solid fa-file-excel mr-1"></i> EXCEL
                     </button>
                 </div>
 
@@ -185,8 +185,8 @@
                     <textarea name="descricaoPremios" placeholder="Descreva o que será feito com o valor arrecadado..." class="w-full rounded-2xl px-4 py-4 outline-none transition-all h-24" required></textarea>
                 </div>
                 <div class="md:col-span-2">
-                    <label class="text-[9px] font-bold gold-text uppercase ml-2 mb-1 block">Formas de Doar</label>
-                    <textarea name="obsCampanha" placeholder="Pix CPF 999.999.999-99" class="w-full rounded-2xl px-4 py-4 outline-none transition-all h-20"></textarea>
+                    <label class="text-[9px] font-bold gold-text uppercase ml-2 mb-1 block">Observações / Promoções</label>
+                    <textarea name="obsCampanha" placeholder="Ex: Doe 3 cotas e ganhe um brinde..." class="w-full rounded-2xl px-4 py-4 outline-none transition-all h-20"></textarea>
                 </div>
                 <div class="md:col-span-2 pt-4">
                     <button type="submit" class="w-full gold-bg text-black font-black py-5 rounded-2xl transition-all shadow-xl shadow-gold-primary/10 uppercase text-xs tracking-widest">
@@ -199,7 +199,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycby3plm3c3F14xqTQBT46XDWX2n9esatskO2ny0jpdlwDfMGyQkf78tSHjY1vmWw34J0kw/exec";
+        const API_URL = "COLE_AQUI_A_URL_DO_SEU_SCRIPT";
         let sessao = { idCliente: "", nomeLoja: "" };
         let campanhas = [];
         let campanhaAtiva = null;
@@ -266,7 +266,7 @@
 
         async function atualizarDados() {
             try {
-                const res = await fetch(`${API_URL}?action=listarreservas&idCliente=${sessao.ID_Cliente}&idCampanha=${campanhaAtiva.id}`);
+                const res = await fetch(`${API_URL}?action=listarreservas&idCliente=${sessao.idCliente}&idCampanha=${campanhaAtiva.id}`);
                 const json = await res.json();
                 const tabela = document.getElementById("tabelaReservas");
                 tabela.innerHTML = "";
