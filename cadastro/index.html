@@ -46,7 +46,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="md:col-span-2">
                         <label class="text-[10px] font-bold green-text uppercase ml-2 mb-1 block">Nome da Instituição *</label>
-                        <input type="text" name="nomeInstituicao" placeholder="Ex: Missão Josué" class="w-full rounded-xl px-4 py-3 outline-none transition-all" required>
+                        <input type="text" name="nomeInstituicao" placeholder="Ex: Missão Eu+" class="w-full rounded-xl px-4 py-3 outline-none transition-all" required>
                     </div>
                     <div class="md:col-span-2">
                         <label class="text-[10px] font-bold green-text uppercase ml-2 mb-1 block">Nome do Responsável *</label>
@@ -127,7 +127,7 @@
                 if (result.status === "sucesso") {
                     document.getElementById('resID').innerText = result.idCliente;
                     document.getElementById('resSenha').innerText = result.senha;
-                    document.getElementById('linkAdm').href = "admin.html?id=" + result.idCliente;
+                    document.getElementById('linkAdm').href = "https://eumaisempresa.github.io/colaboraai/adm/";
                     document.getElementById('cardCadastro').classList.add('hidden');
                     document.getElementById('cardSucesso').classList.remove('hidden');
                 } else { alert("Erro: " + result.mensagem); }
