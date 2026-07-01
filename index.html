@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colabora AI⁺ | Estrutura para o seu Propósito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #060E18;
+            --bg-secondary: #0A1624;
+            --gold-primary: #C4974A;
+            --green-missao: #7AAD66;
+            --text-primary: #EEF0F2;
+            --text-secondary: #7A8FA3;
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .gold-text { color: var(--gold-primary); }
+        .green-text { color: var(--green-missao); }
+        .bg-gold { background-color: var(--gold-primary); }
+        .bg-green-missao { background-color: var(--green-missao); }
+        
+        .hero-gradient {
+            background: radial-gradient(circle at 50% -20%, rgba(122, 173, 102, 0.15) 0%, rgba(6, 14, 24, 0) 50%);
+        }
+        .glass-card {
+            background: rgba(10, 22, 36, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 151, 74, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(196, 151, 74, 0.3);
+            transform: translateY(-5px);
+        }
+        .btn-primary {
+            background-color: var(--green-missao);
+            color: #060E18;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(122, 173, 102, 0.4);
+        }
+        .positive-symbol {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--gold-primary);
+            vertical-align: super;
+            font-size: 0.6em;
+        }
+    </style>
+</head>
+<body class="hero-gradient">
+
+    <!-- Navigation -->
+    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
+        <div class="text-2xl font-serif font-semibold tracking-tight">
+            COLABORA AI<span class="positive-symbol">⁺</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+            <a href="#solucao" class="hover:text-white transition">Solução</a>
+            <a href="#beneficios" class="hover:text-white transition">Benefícios</a>
+            <a href="#seguranca" class="hover:text-white transition">Segurança</a>
+        </div>
+        <a href="cadastro.html" class="btn-primary px-6 py-2 rounded-full text-[10px] uppercase tracking-widest">
+            Ativar Estrutura
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="max-w-5xl mx-auto px-6 pt-20 pb-32 text-center space-y-8">
+        <div class="space-y-4">
+            <h2 class="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.3em]">Grupo EU⁺ Missão apresenta</h2>
+            <h1 class="text-5xl md:text-7xl font-serif italic leading-tight">
+                Propósito também precisa de <br>
+                <span class="gold-text">estrutura profissional.</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-zinc-400 text-lg font-light leading-relaxed">
+                Transforme sua arrecadação social em uma plataforma tecnológica de alto impacto. Transparência, automação e legado para sua instituição.
+            </p>
+        </div>
+        <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
+            <a href="cadastro.html" class="btn-primary px-10 py-4 rounded-xl text-xs uppercase tracking-widest shadow-2xl">
+                Começar agora gratuitamente
+            </a>
+            <a href="#solucao" class="border border-white/10 hover:bg-white/5 px-10 py-4 rounded-xl text-xs uppercase tracking-widest transition">
+                Conhecer a ferramenta
+            </a>
+        </div>
+    </header>
+
+    <!-- Features Grid -->
+    <section id="solucao" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-card p-10 rounded-[2.5rem] space-y-6">
+                <div class="w-12 h-12 bg-green-900/30 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-layer-group green-text text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-serif italic">Arquitetura SaaS</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">
+                    Sua própria plataforma de arrecadação, com painel administrativo exclusivo e gestão de múltiplas campanhas em um só lugar.
+                </p>
+            </div>
+            <div class="glass-card p-10 rounded-[2.5rem] space-y-6">
+                <div class="w-12 h-12 bg-amber-900/20 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-chart-line gold-text text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-serif italic">KPIs em Tempo Real</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">
+                    Acompanhe metas, doações confirmadas e reservas pendentes com indicadores precisos. Gestão baseada em dados, não em suposições.
+                </p>
+            </div>
+            <div class="glass-card p-10 rounded-[2.5rem] space-y-6">
+                <div class="w-12 h-12 bg-blue-900/20 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-shield-halved text-blue-400 text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-serif italic">Segurança & LGPD</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">
+                    Tratamento ético e legal dos dados dos doadores. Sua instituição em conformidade com as normas de proteção de dados.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section id="beneficios" class="max-w-7xl mx-auto px-6 py-32 grid md:grid-cols-2 gap-20 items-center">
+        <div class="space-y-8">
+            <h2 class="text-4xl md:text-5xl font-serif italic leading-tight">
+                Tecnologia a serviço <br>
+                da <span class="green-text">comunidade.</span>
+            </h2>
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <div class="mt-1"><i class="fa-solid fa-check green-text"></i></div>
+                    <p class="text-zinc-400 text-sm"><strong class="text-white">Checkout via WhatsApp:</strong> Facilite a doação com envio automático de comprovantes e lembretes amigáveis.</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="mt-1"><i class="fa-solid fa-check green-text"></i></div>
+                    <p class="text-zinc-400 text-sm"><strong class="text-white">Relatórios Profissionais:</strong> Gere listas de doadores e performance da campanha em um clique.</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="mt-1"><i class="fa-solid fa-check green-text"></i></div>
+                    <p class="text-zinc-400 text-sm"><strong class="text-white">Identidade Visual Premium:</strong> Uma interface que transmite a seriedade e o valor do seu legado.</p>
+                </div>
+            </div>
+        </div>
+        <div class="relative">
+            <div class="absolute -inset-4 bg-green-600/10 blur-3xl rounded-full"></div>
+            <div class="glass-card rounded-[3rem] p-4 relative border-white/5">
+                <div class="bg-black/40 rounded-[2.5rem] p-8 aspect-square flex flex-col justify-center items-center text-center space-y-4">
+                    <div class="text-5xl font-serif italic gold-text">100%</div>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Transparência na Arrecadação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="max-w-5xl mx-auto px-6 py-20">
+        <div class="glass-card rounded-[3rem] p-12 md:p-20 text-center space-y-8 border-gold-primary/20">
+            <h2 class="text-4xl md:text-6xl font-serif italic">Pronto para ativar <br> sua estrutura?</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto">
+                Junte-se a dezenas de instituições que já profissionalizaram suas ações sociais com o Colabora AI⁺.
+            </p>
+            <div class="pt-4">
+                <a href="cadastro.html" class="btn-primary px-12 py-5 rounded-2xl text-xs uppercase tracking-widest inline-block">
+                    Criar meu Painel Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5 text-center space-y-8">
+        <div class="text-xl font-serif font-semibold tracking-tight">
+            COLABORA AI<span class="positive-symbol">⁺</span>
+        </div>
+        <p class="text-zinc-500 text-[10px] uppercase tracking-widest">
+            Uma solução desenvolvida por <span class="white-text">EU⁺ Empresa</span> <br>
+            Parte do <span class="gold-text">Grupo EU⁺</span>
+        </p>
+        <div class="text-[9px] text-zinc-600">
+            &copy; 2026 Grupo EU⁺. Todos os direitos reservados. <br>
+            "Propósito também precisa de estrutura."
+        </div>
+    </footer>
+
+</body>
+</html>
