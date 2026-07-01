@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ativar Estrutura | EU⁺ Missão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #060E18;
+            --gold-primary: #C4974A;
+            --green-missao: #7AAD66;
+            --text-primary: #EEF0F2;
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'DM Sans', sans-serif; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .gold-text { color: var(--gold-primary); }
+        .green-text { color: var(--green-missao); }
+        .btn-green { background-color: var(--green-missao); color: #060E18; font-weight: 700; }
+        .btn-green:hover { filter: brightness(1.1); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div id="boxForm" class="w-full max-w-xl bg-[#0A1624] border border-white/5 rounded-[2.5rem] p-8 md:p-12 space-y-8 shadow-2xl">
+        <div class="text-center space-y-2">
+            <h1 class="text-4xl font-serif font-semibold tracking-tight">EU<span class="gold-text">⁺</span> Missão</h1>
+            <p class="text-[10px] font-bold gold-text uppercase tracking-[0.3em]">Ativar Estrutura de Arrecadação</p>
+            <p class="text-xs text-zinc-500 italic">"Propósito também precisa de estrutura."</p>
+        </div>
+
+        <form id="formCadastro" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="nomeInst" placeholder="Nome da Instituição" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#7AAD66] transition-all" required>
+                <input type="text" id="responsavel" placeholder="Nome do Responsável" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#7AAD66] transition-all" required>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <select id="segmento" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#7AAD66] transition-all appearance-none text-zinc-400">
+                    <option value="Assistencial">Assistencial</option>
+                    <option value="Igreja">Igreja</option>
+                    <option value="Social">Social</option>
+                </select>
+                <input type="email" id="email" placeholder="E-mail de Contato" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#7AAD66] transition-all" required>
+            </div>
+            <input type="tel" id="whatsapp" placeholder="WhatsApp (DDD + Número)" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#7AAD66] transition-all" required>
+
+            <button type="submit" id="btnSubmit" class="w-full btn-green py-4 rounded-xl uppercase text-xs tracking-[0.2em] shadow-xl shadow-green-900/10 mt-4">
+                ATIVAR MINHA ESTRUTURA
+            </button>
+        </form>
+        
+        <p class="text-[9px] text-center text-zinc-600 uppercase tracking-widest">Desenvolvido por EU⁺ Empresa | Grupo EU⁺</p>
+    </div>
+
+    <!-- BOX SUCESSO -->
+    <div id="boxSucesso" class="hidden w-full max-w-xl bg-[#0A1624] border border-[#7AAD66]/30 rounded-[2.5rem] p-8 md:p-12 space-y-8 text-center animate-in fade-in zoom-in duration-500">
+        <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-[#7AAD66]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <h2 class="text-3xl font-serif italic green-text">Estrutura Ativada!</h2>
+        <p class="text-sm text-zinc-400">Suas credenciais de acesso ao Painel ADM foram geradas com sucesso.</p>
+        
+        <div class="bg-black/40 rounded-2xl p-6 space-y-4 border border-white/5">
+            <div class="flex justify-between items-center"><span class="text-[10px] uppercase text-zinc-500">Usuário ID:</span><span id="resID" class="font-bold gold-text">---</span></div>
+            <div class="flex justify-between items-center"><span class="text-[10px] uppercase text-zinc-500">Senha:</span><span id="resSenha" class="font-bold gold-text">---</span></div>
+            <button onclick="copiarCredenciais()" class="w-full text-[9px] font-bold text-zinc-400 uppercase border border-zinc-800 py-2 rounded-lg hover:bg-white/5">Copiar Credenciais</button>
+        </div>
+
+        <div class="space-y-3">
+            <p class="text-[10px] text-zinc-500 uppercase font-bold">⚠️ Importante</p>
+            <p class="text-xs text-zinc-400">Você deve enviar seus dados para seu WhatsApp para não perder o acesso antes de entrar no painel.</p>
+            <button id="btnZap" onclick="enviarZap()" class="w-full bg-[#25D366] text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                SALVAR NO WHATSAPP
+            </button>
+            <a id="btnAcessar" href="https://eumaisempresa.github.io/colaboraai/adm/" class="block w-full text-zinc-500 text-[10px] font-bold uppercase opacity-30 pointer-events-none">Acessar Painel ADM</a>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycby3plm3c3F14xqTQBT46XDWX2n9esatskO2ny0jpdlwDfMGyQkf78tSHjY1vmWw34J0kw/exec";
+        let credenciais = null;
+
+        document.getElementById("formCadastro").onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("btnSubmit");
+            btn.disabled = true; btn.innerText = "ATIVANDO...";
+
+            const dados = {
+                action: "cadastrarcliente",
+                nomeInstituicao: document.getElementById("nomeInst").value,
+                responsavel: document.getElementById("responsavel").value,
+                segmento: document.getElementById("segmento").value,
+                email: document.getElementById("email").value,
+                whatsapp: document.getElementById("whatsapp").value
+            };
+
+            try {
+                const res = await fetch(API_URL, { method: "POST", body: JSON.stringify(dados) });
+                const json = await res.json();
+                if(json.status === "sucesso") {
+                    credenciais = json;
+                    document.getElementById("resID").innerText = json.idCliente;
+                    document.getElementById("resSenha").innerText = json.senha;
+                    document.getElementById("boxForm").classList.add("hidden");
+                    document.getElementById("boxSucesso").classList.remove("hidden");
+                }
+            } catch(e) { alert("Erro ao cadastrar."); }
+            btn.disabled = false; btn.innerText = "ATIVAR MINHA ESTRUTURA";
+        };
+
+        function copiarCredenciais() {
+            const texto = `ID: ${credenciais.idCliente}\nSenha: ${credenciais.senha}`;
+            navigator.clipboard.writeText(texto); alert("Copiado!");
+        }
+
+        function enviarZap() {
+            const msg = `Olá! Minha estrutura Colabora AI⁺ foi ativada.\n\nUsuário: ${credenciais.idCliente}\nSenha: ${credenciais.senha}\nPainel: https://eumaisempresa.github.io/colaboraai/adm/`;
+            const zap = document.getElementById("whatsapp").value.replace(/\D/g, '');
+            window.open(`https://api.whatsapp.com/send?phone=${zap}&text=${encodeURIComponent(msg)}`, '_blank');
+            
+            // Libera o botão de acesso após enviar zap
+            document.getElementById("btnAcessar").classList.remove("opacity-30", "pointer-events-none");
+            document.getElementById("btnAcessar").classList.add("hover:text-[#7AAD66]");
+        }
+    </script>
+</body>
+</html>
