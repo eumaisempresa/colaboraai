@@ -6,7 +6,7 @@
     <title>Doar agora | Colabora AI⁺</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-primary: #060E18;
@@ -14,44 +14,41 @@
             --gold-primary: #C4974A;
             --green-missao: #7AAD66;
             --text-primary: #EEF0F2;
-            --border-gold: rgba(196, 151, 74, 0.18);
         }
         body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
         .gold-text { color: var(--gold-primary); }
         .green-text { color: var(--green-missao); }
-        .sup-plus { vertical-align: super; font-size: 0.6em; color: var(--gold-primary); }
-        .glass-card { background: var(--bg-secondary); border: 1px solid var(--border-gold); }
-        
-        .grid-numbers { display: grid; grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); gap: 8px; }
+        .glass-card { background: var(--bg-secondary); border: 1px solid rgba(196, 151, 74, 0.1); }
         .num-btn {
             height: 45px; display: flex; align-items: center; justify-content: center;
             border-radius: 10px; font-size: 12px; font-weight: bold; cursor: pointer;
             transition: all 0.2s; border: 1px solid rgba(255,255,255,0.05);
         }
         .num-vago { background: rgba(122, 173, 102, 0.1); color: var(--green-missao); border-color: rgba(122, 173, 102, 0.2); }
-        .num-vago:hover { background: var(--green-missao); color: #000; }
         .num-selecionado { background: var(--gold-primary); color: #000; border-color: var(--gold-primary); }
         .num-reservado { background: rgba(251, 191, 36, 0.1); color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); cursor: not-allowed; }
         .num-pago { background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2); cursor: not-allowed; }
         .btn-green { background-color: var(--green-missao); color: #060E18; font-weight: 900; }
+        input { color: #000 !important; } /* Garante visibilidade do texto digitado */
     </style>
 </head>
 <body class="min-h-screen pb-20">
 
     <header class="w-full py-8 px-4 text-center space-y-2">
-        <h1 class="text-4xl font-semibold tracking-tighter">COLABORA AI<span class="sup-plus">⁺</span></h1>
-        <p class="text-[10px] font-bold green-text uppercase tracking-widest" id="nomeInstituicao">Carregando...</p>
-        <div class="h-[1px] w-16 bg-[#7AAD66] mx-auto mt-4 opacity-30"></div>
+        <h1 class="text-4xl font-serif font-semibold tracking-tighter">COLABORA AI<span class="gold-text">⁺</span></h1>
+        <div class="space-y-1">
+            <p class="text-[10px] font-bold gold-text uppercase tracking-widest" id="idInstituicao">ID: ---</p>
+            <p class="text-xs font-serif italic text-zinc-400" id="nomeInstituicao">Carregando Instituição...</p>
+        </div>
     </header>
 
     <main class="max-w-3xl mx-auto px-4 space-y-8">
-        <!-- DETALHES DA CAMPANHA -->
         <section class="glass-card rounded-[2rem] p-8 space-y-6 text-center">
-            <h2 class="text-3xl italic" id="nomeCampanha">---</h2>
-            <div class="flex justify-center gap-8 py-4 border-y border-gold-primary/10">
+            <h2 class="text-3xl font-serif italic" id="nomeCampanha">---</h2>
+            <div class="flex justify-center gap-8 py-4 border-y border-white/5">
                 <div>
-                    <p class="text-[9px] font-bold text-zinc-500 uppercase">Valor da Cota</p>
+                    <p class="text-[9px] font-bold text-zinc-500 uppercase">Cota de Doação</p>
                     <p class="text-2xl font-black gold-text" id="valorCota">R$ 0,00</p>
                 </div>
                 <div>
@@ -61,66 +58,59 @@
             </div>
             <div class="text-left space-y-4">
                 <div>
-                    <p class="text-[10px] font-bold green-text uppercase mb-1">Propósito da Arrecadação</p>
+                    <p class="text-[10px] font-bold green-text uppercase mb-1">Propósito</p>
                     <p class="text-sm text-zinc-300 leading-relaxed" id="descPropisito">---</p>
-                </div>
-                <div id="boxObs" class="hidden bg-white/5 p-4 rounded-xl border-l-4 border-[#7AAD66]">
-                    <p class="text-[10px] font-bold green-text uppercase mb-1">Observações / Promoções</p>
-                    <p class="text-sm italic text-zinc-400" id="txtObs">---</p>
                 </div>
             </div>
         </section>
 
-        <!-- GRID DE NÚMEROS -->
         <section class="space-y-4">
             <div class="flex justify-between items-center px-2">
-                <h3 class="text-xl italic">Escolha suas cotas</h3>
+                <h3 class="text-xl font-serif italic">Escolha suas cotas</h3>
                 <div class="flex gap-3 text-[9px] font-bold uppercase">
                     <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-600"></div> Livres</span>
                     <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-amber-500"></div> Reservados</span>
                 </div>
             </div>
             <div class="glass-card rounded-[2rem] p-6">
-                <div id="gridNumeros" class="grid-numbers"></div>
+                <div id="gridNumeros" class="grid grid-cols-6 md:grid-cols-10 gap-2"></div>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER FIXO DE CHECKOUT -->
     <div id="footerCheckout" class="fixed bottom-0 left-0 w-full bg-[#0A1624] border-t border-gold-primary/20 p-4 transform translate-y-full transition-all duration-300 z-50">
         <div class="max-w-3xl mx-auto flex items-center justify-between">
             <div>
-                <p class="text-[10px] font-bold text-zinc-500 uppercase">Cotas Selecionadas</p>
+                <p class="text-[10px] font-bold text-zinc-500 uppercase">Selecionadas</p>
                 <p id="txtCheckout" class="text-sm font-black gold-text">Nenhuma</p>
             </div>
-            <button onclick="abrirModalReserva()" class="btn-green px-8 py-3 rounded-xl uppercase text-xs tracking-widest shadow-xl shadow-green-900/20">
-                DOAR AGORA <span id="totalCheckout">R$ 0,00</span>
+            <button onclick="abrirModalReserva()" class="btn-green px-8 py-3 rounded-xl uppercase text-xs tracking-widest shadow-xl">
+                DOAR <span id="totalCheckout">R$ 0,00</span>
             </button>
         </div>
     </div>
 
-    <!-- MODAL DE RESERVA -->
-    <div id="modalReserva" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+    <div id="modalReserva" class="fixed inset-0 bg-black/95 z-[100] hidden items-center justify-center p-4">
         <div class="glass-card rounded-[2.5rem] p-8 max-w-md w-full space-y-6">
             <div class="text-center">
-                <h2 class="text-3xl italic green-text">Confirmar Doação</h2>
-                <p class="text-xs text-zinc-500 uppercase tracking-widest mt-1">Preencha seus dados para identificação</p>
+                <h2 class="text-3xl font-serif italic green-text">Confirmar Doação</h2>
+                <p class="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">Identifique-se para validar sua cota</p>
             </div>
             <form id="formReserva" class="space-y-4">
-                <input type="text" id="nomeDoador" placeholder="Seu Nome Completo" class="w-full rounded-xl px-4 py-4 outline-none transition-all" required>
-                <input type="tel" id="zapDoador" placeholder="Seu WhatsApp (99) 99999-9999" class="w-full rounded-xl px-4 py-4 outline-none transition-all" required>
+                <input type="text" id="nomeDoador" placeholder="Seu Nome" class="w-full rounded-xl px-4 py-4 outline-none font-bold" required>
+                <input type="tel" id="zapDoador" placeholder="WhatsApp" class="w-full rounded-xl px-4 py-4 outline-none font-bold" required>
                 
-                <div class="bg-black/30 p-4 rounded-xl space-y-2">
-                    <div class="flex justify-between text-[10px]"><span class="text-zinc-500">Chave PIX:</span><span id="pixCampanha" class="font-bold green-text">---</span></div>
-                    <button type="button" onclick="copiarPix()" class="w-full text-[9px] font-bold text-zinc-400 uppercase border border-zinc-700 py-1 rounded-md hover:bg-white/5"><i class="fa-solid fa-copy mr-1"></i> Copiar Chave PIX</button>
-                    <div class="h-[1px] bg-white/5 my-2"></div>
+                <div class="bg-black/40 p-5 rounded-2xl space-y-3 border border-white/5">
+                    <div class="flex justify-between items-center"><span class="text-[10px] uppercase text-zinc-500">Chave PIX:</span><span id="pixCampanha" class="font-bold green-text">---</span></div>
+                    <button type="button" onclick="copiarPix()" class="w-full text-[9px] font-bold text-zinc-400 uppercase border border-zinc-700 py-2 rounded-lg hover:bg-white/5"><i class="fa-solid fa-copy mr-1"></i> Copiar Chave PIX</button>
+                    <div class="h-[1px] bg-white/5 my-1"></div>
                     <div class="flex justify-between text-xs"><span class="text-zinc-500">Cotas:</span><span id="resumoCotas" class="font-bold gold-text">---</span></div>
                     <div class="flex justify-between text-lg font-black"><span class="text-white">Total:</span><span id="resumoTotal" class="gold-text">R$ 0,00</span></div>
                 </div>
 
                 <p class="text-[9px] text-zinc-500 text-center italic">"Envio meu nome e telefone de forma voluntária para participar da ação social."</p>
 
-                <button type="submit" id="btnConfirmar" class="w-full btn-green py-4 rounded-xl uppercase text-xs tracking-widest shadow-xl shadow-green-900/20">
+                <button type="submit" id="btnConfirmar" class="w-full btn-green py-4 rounded-xl uppercase text-xs tracking-widest shadow-xl">
                     RESERVAR E ENVIAR COMPROVANTE
                 </button>
                 <button type="button" onclick="fecharModalReserva()" class="w-full text-zinc-500 text-[10px] font-bold uppercase">Cancelar</button>
@@ -145,27 +135,27 @@
 
         async function carregarDados() {
             try {
+                // Carrega nome da instituição para o cabeçalho
+                const resL = await fetch(`${API_URL}?action=validarlogin&idCliente=${idCliente}&senha=DUMMY`);
+                const jsonL = await resL.json();
+                document.getElementById("idInstituicao").innerText = "ID: " + idCliente;
+                document.getElementById("nomeInstituicao").innerText = jsonL.nomeInstituicao || "Instituição Colaboradora";
+
                 const resC = await fetch(`${API_URL}?action=listarcampanhas&idCliente=${idCliente}`);
                 const jsonC = await resC.json();
                 dadosCampanha = jsonC.campanhas.find(c => c.id === idCampanha);
                 
-                document.getElementById("nomeInstituicao").innerText = "INSTITUIÇÃO ID: " + idCliente;
                 document.getElementById("nomeCampanha").innerText = dadosCampanha.nome;
                 document.getElementById("valorCota").innerText = `R$ ${dadosCampanha.valorCota.toFixed(2)}`;
                 document.getElementById("statusCampanha").innerText = dadosCampanha.status;
                 document.getElementById("descPropisito").innerText = dadosCampanha.descricaoPremios;
-                document.getElementById("pixCampanha").innerText = dadosCampanha.chavePix || "Não informada";
+                document.getElementById("pixCampanha").innerText = dadosCampanha.chavePix;
                 
-                if(dadosCampanha.obsCampanha) {
-                    document.getElementById("boxObs").classList.remove("hidden");
-                    document.getElementById("txtObs").innerText = dadosCampanha.obsCampanha;
-                }
-
                 const resR = await fetch(`${API_URL}?action=listarreservas&idCliente=${idCliente}&idCampanha=${idCampanha}`);
                 const jsonR = await resR.json();
                 ocupados = {};
                 jsonR.reservas.forEach(r => {
-                    const nums = r.numeros.split(", ");
+                    const nums = r.numero.split(", ");
                     nums.forEach(n => ocupados[parseInt(n)] = r.statusPagamento === "Aprovado" ? "pago" : "reservado");
                 });
                 renderizarGrid();
@@ -234,7 +224,7 @@
                 const res = await fetch(API_URL, { method: "POST", body: JSON.stringify(dados) });
                 const json = await res.json();
                 if(json.status === "sucesso") {
-                    alert("Reserva realizada! Clique em OK para enviar o comprovante via WhatsApp.");
+                    alert("Reserva realizada! Clique em OK para enviar o comprovante.");
                     const msg = `Olá, realizei uma doação na campanha ${dadosCampanha.nome}.\n\nCotas: ${dados.numeros}\nTotal: ${document.getElementById("resumoTotal").innerText}\nChave PIX: ${dadosCampanha.chavePix}\n\nEstou enviando o comprovante em anexo.`;
                     window.location.href = `https://api.whatsapp.com/send?phone=27997161826&text=${encodeURIComponent(msg)}`;
                 }
