@@ -116,7 +116,7 @@
         }
 
         function enviarZap() {
-            const msg = `Olá! Minha estrutura Colabora AI⁺ foi ativada.\n\nUsuário: ${credenciais.idCliente}\nSenha: ${credenciais.senha}\nPainel: https://eumaisempresa.github.io/colaboraai/adm/`;
+            const msg = `Olá! Minha estrutura Colabora AI⁺ foi ativada.\n\nUsuário: ${credenciais.idCliente}\nSenha: ${credenciais.senha}\nPainel: https://eumaisempresa.github.io/colaboraai/painel/`;
             const zap = document.getElementById("whatsapp").value.replace(/\D/g, '');
             window.open(`https://api.whatsapp.com/send?phone=${zap}&text=${encodeURIComponent(msg)}`, '_blank');
             
